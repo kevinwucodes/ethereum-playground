@@ -16,6 +16,14 @@ eth.defaultAccount = eth.accounts[0]
 const contract = eth.contract(abi)
 const contractInstance = contract.at(address)
 
+const ResultEvent = contractInstance.ResultEvent()
+ResultEvent.watch((err, data) => {
+  if (err) throw err
+  const { result, name } = data.args
+  console.log('event result', result.toNumber())
+  console.log('event name', name)
+})
+
 const doit = async () => {
   console.log('initial result', await contractInstance.getResult().toNumber())
 

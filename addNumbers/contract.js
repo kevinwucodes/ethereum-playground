@@ -1,5 +1,5 @@
 module.exports = {
-  address: '0x22f0849104cca4b630b1b2ec42580be11d0193f5',
+  address: '0x75e59c0b2651e0b3adc56af75143f7bf754096d9',
   abi: [
     {
       constant: true,
@@ -18,6 +18,15 @@ module.exports = {
       payable: false,
       stateMutability: 'nonpayable',
       type: 'function'
+    },
+    {
+      anonymous: false,
+      inputs: [
+        { indexed: false, name: 'result', type: 'uint256' },
+        { indexed: false, name: 'name', type: 'string' }
+      ],
+      name: 'ResultEvent',
+      type: 'event'
     }
   ]
 }
