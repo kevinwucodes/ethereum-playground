@@ -16,4 +16,15 @@ contract TestAdder {
 
     Assert.equal(actual, expected, "3+5 = 8");
   }
+
+  function test_add_negatives() public {
+    Adder adder = Adder(DeployedAddresses.Adder());
+
+    int a = -6;
+    int b = -10;
+    int actual = adder.addNumbers(a,b);
+    int expected = -16;
+
+    Assert.equal(actual, expected, "-6 + -10 = -16");
+  }
 }
