@@ -9,10 +9,10 @@ contract TestAdder {
   function test_3plus5() public {
     Adder adder = Adder(DeployedAddresses.Adder());
 
-    uint a = 3;
-    uint b = 5;
-    uint actual = adder.addNumbers(a,b);
-    uint expected = 8;
+    int a = 3;
+    int b = 5;
+    int actual = adder.addNumbers(a,b);
+    int expected = 8;
 
     Assert.equal(actual, expected, "3+5 = 8");
   }

@@ -8,7 +8,7 @@ contract Adder {
     string name
   );
 
-  function addNumbers(uint a, uint b) public pure returns (uint) {
+  function addNumbers(int a, int b) public pure returns (int) {
     return a + b;
 
     /*events no longer make this pure, but rather "view"*/
