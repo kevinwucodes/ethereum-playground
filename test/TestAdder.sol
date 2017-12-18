@@ -6,7 +6,7 @@ import "../contracts/Adder.sol";
 
 contract TestAdder {
 
-  function test_3plus5() public {
+  function test_simple_add() public {
     Adder adder = Adder(DeployedAddresses.Adder());
 
     int a = 3;
