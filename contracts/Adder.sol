@@ -1,7 +1,6 @@
 pragma solidity ^0.4.2;
 
-contract Adder {
-  uint result;
+library Adder {
 
   event ResultEvent (
     uint result,
@@ -13,9 +12,5 @@ contract Adder {
 
     /*events no longer make this pure, but rather "view"*/
     /*ResultEvent(result, 'hello there');*/
-  }
-
-  function getResult() constant public returns (uint) {
-    return result;
   }
 }
