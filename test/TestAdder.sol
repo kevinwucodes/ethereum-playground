@@ -17,6 +17,17 @@ contract TestAdder {
     Assert.equal(actual, expected, "3+5 = 8");
   }
 
+  function test_simple_add_fail() public {
+    Adder adder = Adder(DeployedAddresses.Adder());
+
+    int a = 10;
+    int b = 20;
+    int actual = adder.addNumbers(a,b);
+    int expectedToNotEqual = 5;
+
+    Assert.notEqual(actual, expectedToNotEqual, "10+20 != 5");
+  }
+
   function test_add_negatives() public {
     Adder adder = Adder(DeployedAddresses.Adder());
 
