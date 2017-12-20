@@ -1,6 +1,6 @@
 pragma solidity ^0.4.2;
 
-library Adder {
+library BasicMath {
 
   event ResultEvent (
     uint result,

@@ -1,5 +1,5 @@
-const Adder = artifacts.require('./Adder.sol')
+const BasicMath = artifacts.require('./BasicMath.sol')
 
 module.exports = function(deployer) {
-  deployer.deploy(Adder)
+  deployer.deploy(BasicMath)
 }
