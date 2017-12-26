@@ -48,6 +48,17 @@ contract TestDataStorage_one_user {
 
   }
 
+  function test_get_user_at_index() public {
+    address actual = ds.getUserAtIndex(0);
+    address expected = 0x627306090abaB3A6e1400e9345bC60c78a8BEf57;
+
+    Assert.equal(
+      actual,
+      expected,
+      "inserted user should have address of 0x627306090abaB3A6e1400e9345bC60c78a8BEf57"
+    );
+
+  }
 
 
 
