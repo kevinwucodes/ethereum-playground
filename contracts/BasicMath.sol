@@ -2,6 +2,11 @@ pragma solidity ^0.4.18;
 
 library BasicMath {
 
+  struct Rational {
+    int8 scale;
+    int8 precision;
+  }
+
   event ResultEvent (
     uint result,
     string name
