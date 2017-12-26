@@ -26,6 +26,22 @@ contract TestDataStorage {
     );
   }
 
+  function test_insert_one_and_get_user_index() public {
+    DataStorage ds = new DataStorage();
+
+    uint userIndex = ds.insert(acct1, 'kevin');
+
+    uint actual = userIndex;
+    uint expected = 0;
+
+    Assert.equal(
+      actual,
+      expected,
+      "inserted user should have index of 0"
+    );
+
+  }
+
   function test_initialize() public {
     DataStorage ds = new DataStorage();
 
