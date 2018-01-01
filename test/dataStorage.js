@@ -1,16 +1,83 @@
 const DataStorage = artifacts.require('./DataStorage.sol')
 
-contract('DataStorage', accounts => {
-  it('should have no users when initialized', async () => {
-    const instance = await DataStorage.deployed()
-    const userCounts = await instance.getUserCount()
+const acct1 = '0x627306090abab3a6e1400e9345bc60c78a8bef57'
+const acct2 = '0xf17f52151ebef6c7334fad080c5704d77216b732'
+const acct3 = '0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef'
 
-    const actual = userCounts.toNumber()
+// contract('DataStorage initialized', accounts => {
+//   let instance
+//   let inserted
+//   let userCount
+//   before(async () => {
+//     instance = await DataStorage.deployed()
+//     userCount = await instance.getUserCount.call()
+//   })
+//
+//   it('should have a count of zero users', () => {
+//     const actual = userCount.toNumber()
+//     const expected = 0
+//     assert.equal(actual, expected, 'should be zero')
+//   })
+//   it('should NOT be able to get a user of index zero because there are no users', async() => {
+//     // const userIndex = await instance.getUserAtIndex(0)
+//     // console.log('hello there', userIndex);
+//   })
+// })
+//
+
+contract(`DataStorage with one inserted of ${acct1}`, accounts => {
+  let instance
+  let tx
+
+  before(async () => {
+    instance = await DataStorage.deployed()
+    tx = await instance.insert(acct1, 'kevin')
+  })
+
+  it('should return the user index number of zero', async () => {
+    const q = tx.logs.find(log => log.event === 'insertedUser')
+
+    const actual = q.args.userIndex.toNumber()
     const expected = 0
 
-    assert.equal(actual, expected, `user count was not ${expected}`)
+    assert.equal(actual, expected, 'first user should have index of 0')
   })
+
+  it('should have a user count of 1', async () => {
+    const userCount = await instance.getUserCount.call()
+    const actual = userCount.toNumber()
+    const expected = 1
+
+    assert.equal(actual, expected, 'first user should have just one user count')
+  })
+
+  it('should return the address of the inserted user', async () => {
+    const userAddress = await instance.getUserAtIndex(0)
+    const actual = userAddress
+    const expected = acct1
+
+    assert.equal(actual, expected, `first user should be ${expected}`)
+  })
+
+  // it('should have no users when initialized', async () => {
+  //   const instance = await DataStorage.deployed()
+  //   const userCounts = await instance.getUserCount()
+  //
+  //   const actual = userCounts.toNumber()
+  //   const expected = 0
+  //
+  //   assert.equal(actual, expected, `user count was not ${expected}`)
+  // })
+
+  // it('should returns a failure when there are no users', async () => {
+  //   const instance = await DataStorage.deployed()
+  //
+  //   await instance.getUserAtIndex()
+  //
+  // })
 })
+
+////////////////////
 
 // contract('MetaCoin', function(accounts) {
 //   it("should put 10000 MetaCoin in the first account", function() {

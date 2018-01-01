@@ -19,19 +19,28 @@ contract DataStorage {
 
     address[] private userIndex;
 
+    //Events
+    event insertedUser (
+      uint userIndex
+    );
+
 
     function insert(address userAddress, string name) public returns (uint) {
         userStructs[userAddress].name = name;
         userStructs[userAddress].index = userIndex.push(userAddress) - 1;
 
+        insertedUser(userStructs[userAddress].index);
         return userStructs[userAddress].index;
     }
+
+
+    //getters
 
     function getUserCount() public view returns (uint) {
         return userIndex.length;
     }
 
-    function getUserAtIndex(uint index) public view returns (address) {
+    function getUserAtIndex(uint index) public view returns (address userAddress) {
         return userIndex[index];
     }
 
