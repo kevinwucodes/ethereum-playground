@@ -4,27 +4,6 @@ const acct1 = '0x627306090abab3a6e1400e9345bc60c78a8bef57'
 const acct2 = '0xf17f52151ebef6c7334fad080c5704d77216b732'
 const acct3 = '0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef'
 
-// contract('DataStorage initialized', accounts => {
-//   let instance
-//   let inserted
-//   let userCount
-//   before(async () => {
-//     instance = await DataStorage.deployed()
-//     userCount = await instance.getUserCount.call()
-//   })
-//
-//   it('should have a count of zero users', () => {
-//     const actual = userCount.toNumber()
-//     const expected = 0
-//     assert.equal(actual, expected, 'should be zero')
-//   })
-//   it('should NOT be able to get a user of index zero because there are no users', async() => {
-//     // const userIndex = await instance.getUserAtIndex(0)
-//     // console.log('hello there', userIndex);
-//   })
-// })
-//
-
 contract(`DataStorage with one inserted of ${acct1}`, accounts => {
   let instance
   let tx
@@ -58,23 +37,36 @@ contract(`DataStorage with one inserted of ${acct1}`, accounts => {
 
     assert.equal(actual, expected, `first user should be ${expected}`)
   })
+})
 
-  // it('should have no users when initialized', async () => {
-  //   const instance = await DataStorage.deployed()
-  //   const userCounts = await instance.getUserCount()
-  //
-  //   const actual = userCounts.toNumber()
-  //   const expected = 0
-  //
-  //   assert.equal(actual, expected, `user count was not ${expected}`)
-  // })
+contract('DataStorage initialized', accounts => {
+  let instance
+  let userCount
 
-  // it('should returns a failure when there are no users', async () => {
-  //   const instance = await DataStorage.deployed()
-  //
-  //   await instance.getUserAtIndex()
-  //
-  // })
+  before(async () => {
+    instance = await DataStorage.deployed()
+    userCount = await instance.getUserCount.call()
+  })
+
+  it('should have a count of zero users', () => {
+    const actual = userCount.toNumber()
+    const expected = 0
+
+    assert.equal(actual, expected)
+  })
+  it('should NOT be able to get a user of index zero because there are no users', async () => {
+    try {
+      //this should fail
+      const userAddress = await instance.getUserAtIndex(0)
+    } catch (err) {
+      const actual = err.message.indexOf(
+        `VM Exception while processing transaction: invalid opcode`
+      )
+      const expected = 0
+
+      assert.equal(actual, expected)
+    }
+  })
 })
 
 ////////////////////
